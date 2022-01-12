@@ -6,6 +6,7 @@ import com.msa.app.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // actions for users
 @Service
@@ -25,7 +26,20 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void deleteUser(UserDTO userDTO) {
-        userRepository.delete(userDTO.mapToUser());
+    public void deleteUser(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    public User editUser(UserDTO userDTO, Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent())
+        {
+            User newUser = user.get();
+            newUser.setName(userDTO.name);
+            newUser.setEmail(userDTO.email);
+
+            return userRepository.save(newUser);
+        }
+        return null;
     }
 }

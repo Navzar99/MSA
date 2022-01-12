@@ -16,6 +16,8 @@ public class User {
     private Integer id;
     private String name;
     private String email;
+    private boolean isAdmin;
+    private String unHashedPassword;
 
     public User() {
     }
