@@ -1,11 +1,8 @@
 package com.msa.app.controllers;
 
-import com.msa.app.UserDTO;
+import com.msa.app.dtos.UserDTO;
 import com.msa.app.entities.User;
-import com.msa.app.repositories.UserRepository;
 import com.msa.app.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,9 +26,14 @@ public class MainController {
         return userService.addUser(userDTO);
     }
 
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/showUsers")
     public List<User> getUsers(){
-            return userService.getAllUsers();
+        return userService.getAllUsers();
+    }
+
+    @DeleteMapping(path = "/removeUser")
+    public void removeUser(@RequestBody UserDTO userDTO){
+        userService.deleteUser(userDTO);
     }
 
 //    @GetMapping(path="/all")

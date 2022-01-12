@@ -1,6 +1,6 @@
 package com.msa.app.services;
 
-import com.msa.app.UserDTO;
+import com.msa.app.dtos.UserDTO;
 import com.msa.app.entities.User;
 import com.msa.app.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -23,5 +23,9 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void deleteUser(UserDTO userDTO) {
+        userRepository.delete(userDTO.mapToUser());
     }
 }

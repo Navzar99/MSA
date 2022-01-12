@@ -10,14 +10,16 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class Table {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private Integer tableNumber;
-
+    private Integer id;
+    private Integer number;
+    private Boolean doesRequestWaiter = false;
 
     public Table() {
+    }
+
+    public Table(Integer tableNumber) {
+        this.number = tableNumber;
     }
 }

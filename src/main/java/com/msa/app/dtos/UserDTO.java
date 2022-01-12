@@ -1,4 +1,4 @@
-package com.msa.app;
+package com.msa.app.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.msa.app.entities.User;
