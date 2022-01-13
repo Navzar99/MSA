@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Data
 public class CustomerTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerTableId;
     private Integer number;
     private Boolean doesRequestWaiter = false;

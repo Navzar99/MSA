@@ -10,37 +10,61 @@ import java.util.List;
 @RestController
 @RequestMapping(path="/tables")
 public class CustomerTableController {
-    private final CustomerTableServices tableServices;
+    private final CustomerTableServices customerTableServices;
 
     public CustomerTableController(CustomerTableServices tableServices) {
-        this.tableServices = tableServices;
+        this.customerTableServices = tableServices;
     }
 
+    // Post
     @PostMapping(path="/addNewTable")
     public CustomerTable addNewTable(@RequestBody CustomerTableDTO tableDTO) {
-        return tableServices.addTable(tableDTO);
+        return customerTableServices.addTable(tableDTO);
+    }
+
+    @PostMapping(path="/addTableInSequence")
+    public CustomerTable addTableInSequence() {
+        return customerTableServices.addTableInSequence();
     }
 
 
-    @GetMapping(path = "/getTables")
+    // Get
+    @GetMapping(path = "/getAllTables")
     public List<CustomerTable> getTables(){
-        return tableServices.getAllTables();
+        return customerTableServices.getAllTables();
     }
 
     @GetMapping(path = "/getRequestedTables")
     public List<CustomerTable> getTablesWithRequests(){
-        return tableServices.getRequestedTables();
+        return customerTableServices.getRequestedTables();
     }
 
 
-
-    @DeleteMapping(path = "/removeTableById/{id}") // pathvariable
+    // Delete
+    @DeleteMapping(path = "/removeTableById/{id}")
     public void removeTableById(@PathVariable Integer id){
-        tableServices.deleteTableById(id);
+        customerTableServices.deleteTableById(id);
     }
 
-    @DeleteMapping(path = "/removeTable") // pathvariable
+    @DeleteMapping(path = "/removeTableFromSequence")
     public void removeTable(){
-        tableServices.deleteTable();
+        customerTableServices.deleteTable();
+    }
+
+
+    // Put
+    @PutMapping(path="/editTableById/{id}")
+    public CustomerTable editTable(@RequestBody CustomerTableDTO customerTableDTO, @PathVariable("id") Integer id) {
+        return customerTableServices.editTable(customerTableDTO, id);
+    }
+
+    @PutMapping(path="/setDoesRequireWaiterTrueById/{id}")
+    public CustomerTable setDoesRequireWaiterTrue(@PathVariable("id") Integer id) {
+        return customerTableServices.setDoesRequireWaiterTrue(id);
+    }
+
+    @PutMapping(path="/setDoesRequireWaiterFalseById/{id}")
+    public CustomerTable setDoesRequireWaiterFalse(@PathVariable("id") Integer id) {
+        return customerTableServices.setDoesRequireWaiterFalse(id);
     }
 }

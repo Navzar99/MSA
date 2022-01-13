@@ -14,16 +14,18 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+    private String shopName;
     private String name;
-    private String email;
-    private boolean isAdmin;
-    private String unHashedPassword;
+    private String password;
+    private Boolean isAdmin;
 
     public User() {
     }
 
-    public User(String name, String email) {
+    public User(String shopName, String name, String password, Boolean isAdmin) {
+        this.shopName = shopName;
         this.name = name;
-        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
 }

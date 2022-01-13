@@ -35,8 +35,10 @@ public class UserService {
         if (user.isPresent())
         {
             User newUser = user.get();
+            newUser.setShopName(userDTO.shopName);
             newUser.setName(userDTO.name);
-            newUser.setEmail(userDTO.email);
+            newUser.setPassword(userDTO.password);
+            newUser.setIsAdmin(userDTO.isAdmin);
 
             return userRepository.save(newUser);
         }

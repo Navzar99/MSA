@@ -6,6 +6,7 @@ import com.msa.app.repositories.CustomerTableRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // actions for users
 @Service
@@ -20,6 +21,19 @@ public class CustomerTableServices {
         return customerTableRepository.save(tableDTO.mapToTable());
     }
 
+    public CustomerTable addTableInSequence() {
+        CustomerTable newCustomerTable = new CustomerTable(1, false);
+
+
+        CustomerTable highestNumber = customerTableRepository.findFirstByOrderByNumberDesc();
+
+        if (highestNumber != null){
+            newCustomerTable.setNumber(highestNumber.getNumber() + 1);
+        }
+
+        return customerTableRepository.save(newCustomerTable);
+    }
+
     public List<CustomerTable> getAllTables() {
         return customerTableRepository.findAll();
     }
@@ -31,6 +45,50 @@ public class CustomerTableServices {
     }
 
     public void deleteTable() {
-        customerTableRepository.delete(customerTableRepository.findTopByNumber(1));
+        customerTableRepository.delete(customerTableRepository.findFirstByOrderByNumberDesc());
+    }
+
+    public CustomerTable editTable(CustomerTableDTO customerTableDTO, Integer id) {
+        Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
+        if (customerTable.isPresent())
+        {
+            CustomerTable newCustomerTable = customerTable.get();
+            newCustomerTable.setDoesRequestWaiter(customerTableDTO.doesRequestWaiter);
+            newCustomerTable.setNumber(customerTableDTO.number);
+
+            return customerTableRepository.save(newCustomerTable);
+        }
+
+        return null;
+    }
+
+    public CustomerTable setDoesRequireWaiterTrue(Integer id) {
+
+        Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
+
+        if (customerTable.isPresent())
+        {
+            CustomerTable newCustomerTable = customerTable.get();
+            newCustomerTable.setDoesRequestWaiter(true);
+
+            return customerTableRepository.save(newCustomerTable);
+        }
+
+        return null;
+    }
+
+    public CustomerTable setDoesRequireWaiterFalse(Integer id) {
+
+        Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
+
+        if (customerTable.isPresent())
+        {
+            CustomerTable newCustomerTable = customerTable.get();
+            newCustomerTable.setDoesRequestWaiter(false);
+
+            return customerTableRepository.save(newCustomerTable);
+        }
+
+        return null;
     }
 }

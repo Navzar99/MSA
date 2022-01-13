@@ -26,17 +26,17 @@ public class UserController {
         return userService.addUser(userDTO);
     }
 
-    @GetMapping(path = "/showUsers")
+    @GetMapping(path = "/showAllUsers")
     public List<User> getUsers(){
         return userService.getAllUsers();
     }
 
-    @DeleteMapping(path = "/removeUser/{id}") // pathvariable
+    @DeleteMapping(path = "/removeUserById/{id}") // path variable
     public void removeUser(@PathVariable Integer id){
         userService.deleteUser(id);
     }
 
-    @PutMapping(path="/editUser/{id}")
+    @PutMapping(path="/editUserById/{id}")
     public User editUser(@RequestBody UserDTO userDTO, @PathVariable("id") Integer id) {
         return userService.editUser(userDTO, id);
     }
