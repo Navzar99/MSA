@@ -18,6 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // POST
     @PostMapping(path="/saveUser") // Map ONLY POST Requests
     public User addNewUser(@RequestBody UserDTO userDTO) {
         // @ResponseBody means the returned String is the response, not a view name
@@ -26,16 +27,21 @@ public class UserController {
         return userService.addUser(userDTO);
     }
 
+    // GET
     @GetMapping(path = "/showAllUsers")
     public List<User> getUsers(){
         return userService.getAllUsers();
     }
 
+
+    // DELETE
     @DeleteMapping(path = "/removeUserById/{id}") // path variable
     public void removeUser(@PathVariable Integer id){
         userService.deleteUser(id);
     }
 
+
+    // PUT
     @PutMapping(path="/editUserById/{id}")
     public User editUser(@RequestBody UserDTO userDTO, @PathVariable("id") Integer id) {
         return userService.editUser(userDTO, id);

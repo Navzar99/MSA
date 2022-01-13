@@ -3,6 +3,7 @@ package com.msa.app.services;
 import com.msa.app.dtos.UserDTO;
 import com.msa.app.entities.User;
 import com.msa.app.repositories.UserRepository;
+import com.msa.app.security.PasswordManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,11 @@ public class UserService {
             User newUser = user.get();
             newUser.setShopName(userDTO.shopName);
             newUser.setName(userDTO.name);
-            newUser.setPassword(userDTO.password);
             newUser.setIsAdmin(userDTO.isAdmin);
+
+            final PasswordManager passwordManager = new PasswordManager();
+            final String hashedPassword = passwordManager.encodePassword(userDTO.password);
+            newUser.setPassword(hashedPassword);
 
             return userRepository.save(newUser);
         }
