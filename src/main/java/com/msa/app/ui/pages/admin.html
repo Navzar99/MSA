@@ -13,18 +13,11 @@
     <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Edit</th>
         <th>Delete</th>
     </tr>
     <tr><!-- TODO references -->
         <td>{this.props.user.name}</td>
         <td>{this.props.user.email}</td>
-        <td><!-- TODO buttons -->
-            <UpdateDialog user={this.props.user}
-                          attributes={this.props.attributes}
-                          onUpdate={this.props.onUpdate}
-                          class="button" />
-        </td>
         <td><!-- TODO buttons -->
             <button class="button" onClick={this.handleDelete}>Delete</button>
         </td>
