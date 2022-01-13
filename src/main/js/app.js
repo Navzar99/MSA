@@ -301,9 +301,9 @@ class User extends React.Component {
 				<td>{this.props.user.name}</td>
 				<td>{this.props.user.email}</td>
 				<td>
-                	<UpdateDialog employee={this.props.employee}
+                	<UpdateDialog user={this.props.user}
                 								  attributes={this.props.attributes}
-                								  onUpdate={this.props.onUpdate}/>
+                								  onUpdate={this.props.onUpdate} />
                 </td>
 				<td>
 					<button onClick={this.handleDelete}>Delete</button>
