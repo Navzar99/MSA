@@ -9,6 +9,7 @@
 
 <div id="react">
     <h1>Tables</h1>
+    <table>
     <tr>
         <th>Number of table</th>
         <th>Called</th>
@@ -19,9 +20,10 @@
         <td>{this.props.table.number}</td>
         <td>Requested Waiter</td>
         <td> <!-- TODO onClick -->
-            <button onClick={this.handleOK}>OK</button>
+            <button class="button" onClick={this.handleOK}>OK</button>
         </td>
     </tr>
+    </table>
 </div>
 
 <script src="built/bundle.js"></script>

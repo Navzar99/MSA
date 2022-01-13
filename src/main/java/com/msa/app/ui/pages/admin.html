@@ -9,6 +9,7 @@
 
 <div id="react">
     <h1>Login</h1>
+    <table>
     <tr>
         <th>Name</th>
         <th>Email</th>
@@ -21,12 +22,14 @@
         <td><!-- TODO buttons -->
             <UpdateDialog user={this.props.user}
                           attributes={this.props.attributes}
-                          onUpdate={this.props.onUpdate} />
+                          onUpdate={this.props.onUpdate}
+                          class="button" />
         </td>
         <td>
-            <button onClick={this.handleDelete}>Delete</button>
+            <button class="button" onClick={this.handleDelete}>Delete</button>
         </td>
     </tr>
+    </table>
 </div>
 
 <script src="built/bundle.js"></script>
