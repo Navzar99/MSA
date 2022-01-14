@@ -9,7 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="/tables")
-public class CustomerTableController {
+@CrossOrigin("http://localhost:4200")
+        public class CustomerTableController {
     private final CustomerTableServices customerTableServices;
 
     public CustomerTableController(CustomerTableServices tableServices) {
