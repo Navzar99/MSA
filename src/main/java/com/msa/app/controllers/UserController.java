@@ -3,9 +3,12 @@ package com.msa.app.controllers;
 import com.msa.app.dtos.UserDTO;
 import com.msa.app.entities.User;
 import com.msa.app.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController// This means that this class is a Controller
 @RequestMapping(path="/users") // This means URL's start with /demo (after Application path)
@@ -22,17 +25,17 @@ public class UserController {
     // POST
     // TODO: https://www.baeldung.com/spring-response-entity
     @PostMapping(path="/saveUser") // Map ONLY POST Requests
-    public User addNewUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<User> addNewUser(@RequestBody UserDTO userDTO) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        return userService.addUser(userDTO);
+        return new ResponseEntity<User>(userService.addUser(userDTO), HttpStatus.OK);
     }
 
     // GET
     @GetMapping(path = "/showAllUsers")
-    public List<User> getUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getUsers(){
+        return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
     }
 
 
@@ -45,7 +48,11 @@ public class UserController {
 
     // PUT
     @PutMapping(path="/editUserById/{id}")
-    public User editUser(@RequestBody UserDTO userDTO, @PathVariable("id") Integer id) {
-        return userService.editUser(userDTO, id);
+    public ResponseEntity<User> editUser(@RequestBody UserDTO userDTO, @PathVariable("id") Integer id) {
+        Optional<User> searchedUser = userService.editUser(userDTO, id);
+        if (searchedUser.isPresent())
+            return new ResponseEntity<User>(searchedUser.get(), HttpStatus.OK);
+
+        return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
     }
 }

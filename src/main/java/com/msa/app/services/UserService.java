@@ -31,7 +31,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User editUser(UserDTO userDTO, Integer id) {
+    public Optional<User> editUser(UserDTO userDTO, Integer id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent())
         {
@@ -44,8 +44,8 @@ public class UserService {
             final String hashedPassword = passwordManager.encodePassword(userDTO.password);
             newUser.setPassword(hashedPassword);
 
-            return userRepository.save(newUser);
+            return Optional.of(userRepository.save(newUser));
         }
-        return null;
+        return Optional.empty();
     }
 }

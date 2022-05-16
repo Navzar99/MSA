@@ -48,7 +48,7 @@ public class CustomerTableServices {
         customerTableRepository.delete(customerTableRepository.findFirstByOrderByNumberDesc());
     }
 
-    public CustomerTable editTable(CustomerTableDTO customerTableDTO, Integer id) {
+    public Optional<CustomerTable> editTable(CustomerTableDTO customerTableDTO, Integer id) {
         Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
         if (customerTable.isPresent())
         {
@@ -56,13 +56,13 @@ public class CustomerTableServices {
             newCustomerTable.setDoesRequestWaiter(customerTableDTO.doesRequestWaiter);
             newCustomerTable.setNumber(customerTableDTO.number);
 
-            return customerTableRepository.save(newCustomerTable);
+            return Optional.of(customerTableRepository.save(newCustomerTable));
         }
 
-        return null;
+        return Optional.empty();
     }
 
-    public CustomerTable setDoesRequireWaiterTrue(Integer number) {
+    public Optional<CustomerTable> setDoesRequireWaiterTrueByNumber(Integer number) {
 
         Optional<CustomerTable> customerTable = Optional.ofNullable(customerTableRepository.findByNumber(number));
 
@@ -71,13 +71,13 @@ public class CustomerTableServices {
             CustomerTable newCustomerTable = customerTable.get();
             newCustomerTable.setDoesRequestWaiter(true);
 
-            return customerTableRepository.save(newCustomerTable);
+            return Optional.of(customerTableRepository.save(newCustomerTable));
         }
 
-        return null;
+        return Optional.empty();
     }
 
-    public CustomerTable setDoesRequireWaiterFalse_ByNumber(Integer number) {
+    public Optional<CustomerTable> setDoesRequireWaiterFalseByNumber(Integer number) {
 
         Optional<CustomerTable> customerTable = Optional.ofNullable(customerTableRepository.findByNumber(number));
 
@@ -86,9 +86,9 @@ public class CustomerTableServices {
             CustomerTable newCustomerTable = customerTable.get();
             newCustomerTable.setDoesRequestWaiter(false);
 
-            return customerTableRepository.save(newCustomerTable);
+            return Optional.of(customerTableRepository.save(newCustomerTable));
         }
 
-        return null;
+        return Optional.empty();
     }
 }
