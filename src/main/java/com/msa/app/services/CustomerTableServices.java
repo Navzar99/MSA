@@ -62,9 +62,9 @@ public class CustomerTableServices {
         return null;
     }
 
-    public CustomerTable setDoesRequireWaiterTrue(Integer id) {
+    public CustomerTable setDoesRequireWaiterTrue(Integer number) {
 
-        Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
+        Optional<CustomerTable> customerTable = Optional.ofNullable(customerTableRepository.findByNumber(number));
 
         if (customerTable.isPresent())
         {
@@ -77,9 +77,9 @@ public class CustomerTableServices {
         return null;
     }
 
-    public CustomerTable setDoesRequireWaiterFalse(Integer id) {
+    public CustomerTable setDoesRequireWaiterFalse_ByNumber(Integer number) {
 
-        Optional<CustomerTable> customerTable = customerTableRepository.findById(id);
+        Optional<CustomerTable> customerTable = Optional.ofNullable(customerTableRepository.findByNumber(number));
 
         if (customerTable.isPresent())
         {

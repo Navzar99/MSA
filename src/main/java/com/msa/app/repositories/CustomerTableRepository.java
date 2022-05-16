@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CustomerTableRepository extends JpaRepository<CustomerTable, Integer> {
     CustomerTable findFirstByOrderByNumberDesc();
+    CustomerTable findByNumber(Integer Number);
     List<CustomerTable> findCustomerTablesByDoesRequestWaiterEquals(Boolean doesRequestWaiter);
 }

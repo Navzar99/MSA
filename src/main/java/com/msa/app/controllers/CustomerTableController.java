@@ -59,13 +59,13 @@ import java.util.List;
         return customerTableServices.editTable(customerTableDTO, id);
     }
 
-    @PutMapping(path="/setDoesRequireWaiterTrueById/{id}")
-    public CustomerTable setDoesRequireWaiterTrue(@PathVariable("id") Integer id) {
-        return customerTableServices.setDoesRequireWaiterTrue(id);
+    @PutMapping(path="/setDoesRequireWaiterTrueByNumber/{id}")
+    public CustomerTable setDoesRequireWaiterTrue(@PathVariable("id") Integer number) {
+        return customerTableServices.setDoesRequireWaiterTrue(number);
     }
 
-    @PutMapping(path="/setDoesRequireWaiterFalseById/{id}")
-    public CustomerTable setDoesRequireWaiterFalse(@PathVariable("id") Integer id) {
-        return customerTableServices.setDoesRequireWaiterFalse(id);
+    @PutMapping(path="/setDoesRequireWaiterFalseByNumber/{id}")
+    public CustomerTable setDoesRequireWaiterFalse(@PathVariable("id") Integer number) {
+        return customerTableServices.setDoesRequireWaiterFalse_ByNumber(number);
     }
 }
